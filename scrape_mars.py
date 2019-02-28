@@ -7,7 +7,7 @@ import pandas as pd
 
 def init_browser():
 # @NOTE: Replace the path with your actual path to the chromedriver
-    executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
+    executable_path = {'executable_path': 'chromedriver'}
     return Browser('chrome', **executable_path, headless=False)
 
 def scrape_info():
@@ -26,10 +26,10 @@ def scrape_info():
 
     ###Nasa Mars News Site 
     #News Title from Site
-    news_title = soup.find_all('div', class_='content_title')
+    news_title = soup.find('div', class_='content_title').text
 
     #News Paragraph from Site
-    news_paragraph = soup.find_all('div', class_='article_teaser_body')
+    news_paragraph = soup.find('div', class_='article_teaser_body').text
 
     #store as dictionary
     mars_news = {
@@ -96,7 +96,7 @@ def scrape_info():
 
     final_data ={}
     final_data["Mars_News"] = mars_news
-    final_data["Mars__Image"] = url_image
+    final_data["Mars_Image"] = url_image
     final_data["Mars_Weather"] = weather_tweet
     final_data["Mars_Facts"] = facts
     final_data["Mars_Hemispheres"] = hemisphere_list
